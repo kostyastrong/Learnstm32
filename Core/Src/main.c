@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+typedef enum {false, true} bool;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -88,7 +88,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  bool num = true;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -96,7 +96,12 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_SET && num) {
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		  num = false;
+	  } else if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET){
+		  num = true;
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
